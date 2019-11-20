@@ -47,50 +47,69 @@
 ### Paging javascript
 
  ```jsx
+    import {BasePage} from 'BaseComponent/BasePage';
     import Pagination from 'components/Pagination';
+    import React from 'react';
     export default class TestPage extends BasePage {
+        constructor(props) {
+            super(props);
+            this.state = {
+                data: [],
+                searchModel: {
+                    searchValue: "",
+                    pagingData: {
+                        pageIndex: 1,
+                        pageSize: 10,
+                        pageTotal: 0,
+                        itemTotal: 0,
+                    },
+                },
+            }
+        }
         _getData = () => {
-            const { searchModel, } = this.props.???;
+            const { searchModel, } = this.state;
             ajax.post({
                 url: `/api/xxx/xxx/`,
                 data: JSON.stringify(searchModel),
                 successCallback: ack => {
                     const _data = ack.data.data // data đã paging
                     const _pagingData = ack.data.pagingData // paging data đã được tính toán
-                    // update state ở đây
+                    this.clearListAndPushNewItems(this.state.data, _data, () => {
+                        this.updateObject(this.state.searchModel.pagingData, _pagingData);
+                    })
                 }
             })
         }
         _gotoNext = () => {
-            const { pagingData } = this.props.???;
+            const { pagingData } = this.state.searchModel;
             if (pagingData.pageIndex < pagingData.pageTotal) {
                 this._gotoPage(pagingData.pageIndex + 1);
             }
         }
         _gotoPrev = () => {
-            const { pagingData } = this.props.???;
+            const { pagingData } = this.state.searchModel;
             if (pagingData.pageIndex > 1) {
                 this._gotoPage(pagingData.pageIndex - 1);
             }
         }
         _gotoPage = (index) => {
-            const { searchModel, } = this.props.???;
-            this.updateObject(searchModel.pagingData, { pageIndex: index }, () => {
-                this._getData();
-            })
+            this.updateObject(this.state.searchModel.pagingData, { pageIndex: index }, this._getData);
         }
         _gotoFirstPage = () => {
             this._gotoPage(1);
         }
         _gotoLastPage = () => {
-            const { searchModel, } = this.props.???;
-            this._gotoPage(searchModel.pagingData.pageTotal);
+            this._gotoPage(this.state.searchModel.pagingData.pageTotal);
         }
 
         childrenRender() {
-
+            const { searchModel, data } = this.state;
+            const { pagingData } = searchModel;
             return (
                 <div>
+                    <RenderData
+                        xxx={data}
+                    />
                     {/* render data các thứ*/}
                     <Pagination
                         total={pagingData.pageTotal}
@@ -105,4 +124,5 @@
             )
         }
     }
+
 ```

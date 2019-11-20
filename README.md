@@ -47,49 +47,49 @@
 ### Paging javascript
 
  ```jsx
-    qimport Pagination from 'components/Pagination';
-    export default TestPage extends BasePage {
-       _getData = () => {
-        const { searchModel, } = this.props.????
-        ajax.post({
-            url: `/api/xxx/xxx/`,
-            data: JSON.stringify(searchModel),
-            successCallback: ack => {
-                const _data = ack.data.data // data đã paging
-                const _pagingData = ack.data.pagingData // paging data đã được tính toán
-                // update state ở đây
+    import Pagination from 'components/Pagination';
+    export default class TestPage extends BasePage {
+        _getData = () => {
+            const { searchModel, } = this.props.????
+                ajax.post({
+                    url: `/api/xxx/xxx/`,
+                    data: JSON.stringify(searchModel),
+                    successCallback: ack => {
+                        const _data = ack.data.data // data đã paging
+                        const _pagingData = ack.data.pagingData // paging data đã được tính toán
+                        // update state ở đây
+                    }
+                })
+       }
+        _gotoNext = () => {
+            const { pagingData } = this.props.????
+            if (pagingData.pageIndex < pagingData.pageTotal) {
+                this._gotoPage(pagingData.pageIndex + 1);
             }
-       })
-   }
-    _gotoNext = () => {
-        const { pagingData } = this.props.????
-        if (pagingData.pageIndex < pagingData.pageTotal) {
-            this._gotoPage(pagingData.pageIndex + 1);
         }
-    }
-    _gotoPrev = () => {
-        const { pagingData } = this.props.????
-        if (pagingData.pageIndex > 1) {
-            this._gotoPage(pagingData.pageIndex - 1);
+        _gotoPrev = () => {
+            const { pagingData } = this.props.????
+            if (pagingData.pageIndex > 1) {
+                this._gotoPage(pagingData.pageIndex - 1);
+            }
         }
-    }
-    _gotoPage = (index) => {
-        const { searchModel, } = this.props.????
-        this.updateObject(searchModel.pagingData, { pageIndex: index }, () => {
-            this._getData();
-        })
-    }
-    _gotoFirstPage = () => {
-        this._gotoPage(1);
-    }
-    _gotoLastPage = () => {
-        const { searchModel, } = this.props.????
-        this._gotoPage(searchModel.pagingData.pageTotal);
-    }
-    
-       childrenRender(){
-           
-           return(
+        _gotoPage = (index) => {
+            const { searchModel, } = this.props.????
+                this.updateObject(searchModel.pagingData, { pageIndex: index }, () => {
+                    this._getData();
+                })
+        }
+        _gotoFirstPage = () => {
+            this._gotoPage(1);
+        }
+        _gotoLastPage = () => {
+            const { searchModel, } = this.props.????
+                this._gotoPage(searchModel.pagingData.pageTotal);
+        }
+
+        childrenRender(){
+
+            return (
                 <div>
                     {/* render data các thứ*/}
                     <Pagination
@@ -102,7 +102,7 @@
                         onClickLast={this._gotoLastPage}
                     />
                 </div>
-           )
-       }
-   }
+            )
+        }
+    }
 ```

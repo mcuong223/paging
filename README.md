@@ -47,7 +47,9 @@
 ### Paging javascript
 
  ```jsx
-   _getData = () => {
+    qimport Pagination from 'components/Pagination';
+    export default TestPage extends BasePage {
+       _getData = () => {
         const { searchModel, } = ~~
         ajax.post({
             url: `/api/xxx/xxx/`,
@@ -84,14 +86,23 @@
         const { searchModel, } = ~~
         this._gotoPage(searchModel.pagingData.pageTotal);
     }
-    import Pagination from 'components/Pagination';
-    <Pagination
-        total={pagingData.pageTotal}
-        current={pagingData.pageIndex}
-        onClickNumber={this._gotoPage}
-        onClickNext={this._gotoNext}
-        onClickPrev={this._gotoPrev}
-        onClickFirst={this._gotoFirstPage}
-        onClickLast={this._gotoLastPage}
-    />
+    
+       childrenRender(){
+           
+           return(
+                <div>
+                    {/* render data các thứ*/}
+                    <Pagination
+                        total={pagingData.pageTotal}
+                        current={pagingData.pageIndex}
+                        onClickNumber={this._gotoPage}
+                        onClickNext={this._gotoNext}
+                        onClickPrev={this._gotoPrev}
+                        onClickFirst={this._gotoFirstPage}
+                        onClickLast={this._gotoLastPage}
+                    />
+                </div>
+           )
+       }
+   }
 ```

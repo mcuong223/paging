@@ -28,7 +28,7 @@
             query = System.Linq.Dynamic.DynamicQueryable.Where(query, condition);    
             
             // skip take paging
-            SetPagingData(searchModel.PagingData, query);
+            await SetPagingData(searchModel.PagingData, query);
             
             // lay data ve memory
             var data = await query.ToListAsync();

@@ -47,11 +47,10 @@
 ### Paging javascript
 
  ```jsx
-    import Pagination from 'components/Pagination';
-    
+    qimport Pagination from 'components/Pagination';
     export default TestPage extends BasePage {
        _getData = () => {
-        const { searchModel, } = ~~
+        const { searchModel, } = this.props.????
         ajax.post({
             url: `/api/xxx/xxx/`,
             data: JSON.stringify(searchModel),
@@ -63,19 +62,19 @@
        })
    }
     _gotoNext = () => {
-        const { pagingData } = ~~
+        const { pagingData } = this.props.????
         if (pagingData.pageIndex < pagingData.pageTotal) {
             this._gotoPage(pagingData.pageIndex + 1);
         }
     }
     _gotoPrev = () => {
-        const { pagingData } = ~~
+        const { pagingData } = this.props.????
         if (pagingData.pageIndex > 1) {
             this._gotoPage(pagingData.pageIndex - 1);
         }
     }
     _gotoPage = (index) => {
-        const { searchModel, } = ~~
+        const { searchModel, } = this.props.????
         this.updateObject(searchModel.pagingData, { pageIndex: index }, () => {
             this._getData();
         })
@@ -84,26 +83,26 @@
         this._gotoPage(1);
     }
     _gotoLastPage = () => {
-        const { searchModel, } = ~~
+        const { searchModel, } = this.props.????
         this._gotoPage(searchModel.pagingData.pageTotal);
     }
     
-   childrenRender(){
-
-       return(
-            <div>
-                {/* render data các thứ*/}
-                <Pagination
-                    total={pagingData.pageTotal}
-                    current={pagingData.pageIndex}
-                    onClickNumber={this._gotoPage}
-                    onClickNext={this._gotoNext}
-                    onClickPrev={this._gotoPrev}
-                    onClickFirst={this._gotoFirstPage}
-                    onClickLast={this._gotoLastPage}
-                />
-            </div>
-       )
-   }
+       childrenRender(){
+           
+           return(
+                <div>
+                    {/* render data các thứ*/}
+                    <Pagination
+                        total={pagingData.pageTotal}
+                        current={pagingData.pageIndex}
+                        onClickNumber={this._gotoPage}
+                        onClickNext={this._gotoNext}
+                        onClickPrev={this._gotoPrev}
+                        onClickFirst={this._gotoFirstPage}
+                        onClickLast={this._gotoLastPage}
+                    />
+                </div>
+           )
+       }
    }
 ```

@@ -1,9 +1,9 @@
 ### Paging C#
 ```csharp
     // hàm set data cho paging data (đã tạo rồi)
-    private void SetPagingData<T>(PagingData pagingData, IQueryable<T> query)
+    private async Task SetPagingData<T>(PagingData pagingData, IQueryable<T> query)
     {
-        pagingData.ItemTotal = query.Count();
+        pagingData.ItemTotal = await query.CountAsync();
         pagingData.PageTotal = pagingData.GetPageTotal();
         pagingData.PageIndex = pagingData.GetPageIndex();
         if (pagingData.PageSize.HasValue)
@@ -14,7 +14,7 @@
         }
     }
     
-    public Acknowledgement<DataWithPaging<Product>> GetProductListTest(SearchModel searchModel)
+    public async Task<Acknowledgement<DataWithPaging<Product>>> GetProductListTest(SearchModel searchModel)
     {
             var ack = new Acknowledgement<DataWithPaging<Product>>();
             var db = POSReadOnlyContext;
@@ -31,7 +31,7 @@
             SetPagingData(searchModel.PagingData, query);
             
             // lay data ve memory
-            var data = query.ToList();
+            var data = await query.ToListAsync();
             ack.Data = new DataWithPaging<Product>()
             {
                 Data = data,

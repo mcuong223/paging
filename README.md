@@ -47,7 +47,8 @@
 ### Paging javascript
 
  ```jsx
-    qimport Pagination from 'components/Pagination';
+    import Pagination from 'components/Pagination';
+    
     export default TestPage extends BasePage {
        _getData = () => {
         const { searchModel, } = ~~
@@ -87,22 +88,22 @@
         this._gotoPage(searchModel.pagingData.pageTotal);
     }
     
-       childrenRender(){
-           
-           return(
-                <div>
-                    {/* render data các thứ*/}
-                    <Pagination
-                        total={pagingData.pageTotal}
-                        current={pagingData.pageIndex}
-                        onClickNumber={this._gotoPage}
-                        onClickNext={this._gotoNext}
-                        onClickPrev={this._gotoPrev}
-                        onClickFirst={this._gotoFirstPage}
-                        onClickLast={this._gotoLastPage}
-                    />
-                </div>
-           )
-       }
+   childrenRender(){
+
+       return(
+            <div>
+                {/* render data các thứ*/}
+                <Pagination
+                    total={pagingData.pageTotal}
+                    current={pagingData.pageIndex}
+                    onClickNumber={this._gotoPage}
+                    onClickNext={this._gotoNext}
+                    onClickPrev={this._gotoPrev}
+                    onClickFirst={this._gotoFirstPage}
+                    onClickLast={this._gotoLastPage}
+                />
+            </div>
+       )
+   }
    }
 ```

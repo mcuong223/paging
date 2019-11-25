@@ -142,10 +142,6 @@ export default class TestPage extends BasePage {
                         )
                     }}
                 />
-                <RenderData
-                    xxx={data}
-                />
-                {/* render data các thứ*/}
                 <Pagination
                     total={pagingData.pageTotal}
                     current={pagingData.pageIndex}

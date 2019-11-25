@@ -49,7 +49,8 @@ public async Task<Acknowledgement<DataWithPaging<Product>>> GetProductListTest(S
  ```jsx
 import {BasePage} from 'BaseComponent/BasePage';
 import Pagination from 'components/Pagination';
-import React from 'react';
+import I3Table from 'component/I3Table';
+import React, {Fragment} from 'react';
 export default class TestPage extends BasePage {
     constructor(props) {
         super(props);
@@ -107,6 +108,40 @@ export default class TestPage extends BasePage {
         const { pagingData } = searchModel;
         return (
             <div>
+                <I3Table 
+                    data={data} // list of objects
+                    grid={[20, 40, 40]} // tỉ lệ phần trăm độ rộng các cột (sum = 100)
+                    headRow={(MuiCell, index) => {
+                        return(
+                            <Fragment>
+                                <MuiCell align="center">
+                                    STT
+                                <MuiCell/>
+                                <MuiCell align="left">
+                                    Name
+                                <MuiCell/>
+                                <MuiCell>
+                                    Age
+                                <MuiCell/>
+                            </Fragment>
+                        )   
+                    }}
+                    bodyRow={(row, MuiCell, index)=>{
+                        return(
+                             <Fragment>
+                                <MuiCell align="center">
+                                    {row.stt}
+                                <MuiCell/>
+                                <MuiCell align="left">
+                                    {row.name}
+                                <MuiCell/>
+                                <MuiCell>
+                                    {row.age}
+                                <MuiCell/>
+                            </Fragment>
+                        )
+                    }}
+                />
                 <RenderData
                     xxx={data}
                 />

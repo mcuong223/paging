@@ -126,7 +126,7 @@ export default class TestPage extends BasePage {
                             </Fragment>
                         )   
                     }}
-                    bodyRow={(row, MuiCell, index)=>{
+                    bodyRow={(row, MuiCell, index)=>{ // row là một object trong list data đưa vào bên trên
                         return(
                              <Fragment>
                                 <MuiCell align="center">

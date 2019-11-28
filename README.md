@@ -1,7 +1,7 @@
 ### Paging C#
 
-##### [Link các model cần thiết](https://github.com/mcuong223/paging/blob/master/class.MD)
-<a href="https://github.com/mcuong223/paging/blob/master/class.MD" target="_blank">example</a>
+<a href="https://github.com/mcuong223/paging/blob/master/class.MD" target="_blank">Link các model cần thiết</a>
+
 ```csharp
 // hàm set data cho paging data (đã tạo rồi)
 private async Task SetPagingData<T>(PagingData pagingData, IQueryable<T> query)

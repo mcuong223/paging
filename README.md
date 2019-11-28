@@ -1,6 +1,6 @@
 ### Paging C#
 
-##### [Link các model cần thiết](https://github.com/mcuong223/paging/blob/master/class.MD)
+##### [Link các model cần thiết](https://github.com/mcuong223/paging/blob/master/class.MD){:target="_blank"}
 
 ```csharp
 // hàm set data cho paging data (đã tạo rồi)

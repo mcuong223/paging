@@ -15,6 +15,7 @@ private async Task<IQueryable<T>> SetPagingData<T>(PagingData pagingData, IQuery
         var take = pagingData.PageSize.Value;
         query = query.Skip(skip).Take(take);
     }
+    return query;
 }
 
 public async Task<AckWithPaging<Product>> GetProductListTest(SearchModel searchModel)

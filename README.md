@@ -1,7 +1,10 @@
 ### Paging C#
+
+##### [Link các model cần thiết](https://github.com/mcuong223/paging/blob/master/class.MD)
+
 ```csharp
 // hàm set data cho paging data (đã tạo rồi)
-private async IQueryable<T> SetPagingData<T>(PagingData pagingData, IQueryable<T> query)
+private async Task SetPagingData<T>(PagingData pagingData, IQueryable<T> query)
 {
     pagingData.ItemTotal = await query.CountAsync();
     pagingData.PageTotal = pagingData.GetPageTotal();
@@ -14,9 +17,9 @@ private async IQueryable<T> SetPagingData<T>(PagingData pagingData, IQueryable<T
     }
 }
 
-public async Task<Acknowledgement<DataWithPaging<Product>>> GetProductListTest(SearchModel searchModel)
+public async Task<AckWithPaging<Product>> GetProductListTest(SearchModel searchModel)
 {
-    var ack = new Acknowledgement<DataWithPaging<Product>>();
+    var ack = new AckWithPaging<Product>();
     var db = POSReadOnlyContext;
     // Tạo queryable bình thường
     var query = db.Products.Include(i => i.ProductAmountThreshold)
@@ -28,15 +31,12 @@ public async Task<Acknowledgement<DataWithPaging<Product>>> GetProductListTest(S
     query = System.Linq.Dynamic.DynamicQueryable.Where(query, condition);    
 
     // skip take paging
-    query = await SetPagingData(searchModel.PagingData, query);
+    await SetPagingData(searchModel.PagingData, query);
 
     // lay data ve memory
     var data = await query.ToListAsync();
-    ack.Data = new DataWithPaging<Product>()
-    {
-        Data = data,
-        PagingData = searchModel.PagingData,
-    };
+    ack.Data = data;
+    ack.PagingData = searchModel.PagingData;
     ack.IsSuccess = true;
     return ack;
 }
@@ -116,32 +116,36 @@ export default class TestPage extends BasePage {
                             <Fragment>
                                 <MuiCell align="center">
                                     STT
-                                </MuiCell>
+                                <MuiCell/>
                                 <MuiCell align="left">
                                     Name
-                                </MuiCell>
+                                <MuiCell/>
                                 <MuiCell>
                                     Age
-                                </MuiCell>
+                                <MuiCell/>
                             </Fragment>
                         )   
                     }}
-                    bodyRow={(row, MuiCell, index)=>{ // row là một object trong list data đưa vào bên trên
+                    bodyRow={(row, MuiCell, index)=>{
                         return(
                              <Fragment>
                                 <MuiCell align="center">
                                     {row.stt}
-                                </MuiCell>
+                                <MuiCell/>
                                 <MuiCell align="left">
                                     {row.name}
-                                </MuiCell>
+                                <MuiCell/>
                                 <MuiCell>
                                     {row.age}
-                                </MuiCell>
+                                <MuiCell/>
                             </Fragment>
                         )
                     }}
                 />
+                <RenderData
+                    xxx={data}
+                />
+                {/* render data các thứ*/}
                 <Pagination
                     total={pagingData.pageTotal}
                     current={pagingData.pageIndex}

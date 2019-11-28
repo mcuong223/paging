@@ -4,7 +4,7 @@
 
 ```csharp
 // hàm set data cho paging data (đã tạo rồi)
-private async Task SetPagingData<T>(PagingData pagingData, IQueryable<T> query)
+private async IQueryable<T> SetPagingData<T>(PagingData pagingData, IQueryable<T> query)
 {
     pagingData.ItemTotal = await query.CountAsync();
     pagingData.PageTotal = pagingData.GetPageTotal();
@@ -31,7 +31,7 @@ public async Task<AckWithPaging<Product>> GetProductListTest(SearchModel searchM
     query = System.Linq.Dynamic.DynamicQueryable.Where(query, condition);    
 
     // skip take paging
-    await SetPagingData(searchModel.PagingData, query);
+    query = await SetPagingData(searchModel.PagingData, query);
 
     // lay data ve memory
     var data = await query.ToListAsync();

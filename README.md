@@ -116,13 +116,13 @@ export default class TestPage extends BasePage {
                             <Fragment>
                                 <MuiCell align="center">
                                     STT
-                                <MuiCell/>
+                                </MuiCell>
                                 <MuiCell align="left">
                                     Name
-                                <MuiCell/>
+                                </MuiCell>
                                 <MuiCell>
                                     Age
-                                <MuiCell/>
+                                </MuiCell>
                             </Fragment>
                         )   
                     }}
@@ -131,13 +131,13 @@ export default class TestPage extends BasePage {
                              <Fragment>
                                 <MuiCell align="center">
                                     {row.stt}
-                                <MuiCell/>
+                                </MuiCell>
                                 <MuiCell align="left">
                                     {row.name}
-                                <MuiCell/>
+                                </MuiCell>
                                 <MuiCell>
                                     {row.age}
-                                <MuiCell/>
+                                </MuiCell>
                             </Fragment>
                         )
                     }}

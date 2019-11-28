@@ -4,7 +4,7 @@
 
 ```csharp
 // hàm set data cho paging data (đã tạo rồi)
-private async IQueryable<T> SetPagingData<T>(PagingData pagingData, IQueryable<T> query)
+private async Task<IQueryable<T>> SetPagingData<T>(PagingData pagingData, IQueryable<T> query)
 {
     pagingData.ItemTotal = await query.CountAsync();
     pagingData.PageTotal = pagingData.GetPageTotal();

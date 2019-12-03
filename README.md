@@ -50,7 +50,7 @@ public async Task<AckWithPaging<Product>> GetProductListTest(SearchModel searchM
  ```jsx
 import {BasePage} from 'BaseComponent/BasePage';
 import Pagination from 'components/Pagination';
-import I3Table from 'component/I3Table';
+import I3Table from 'components/I3Table';
 import React, {Fragment} from 'react';
 export default class TestPage extends BasePage {
     constructor(props) {
